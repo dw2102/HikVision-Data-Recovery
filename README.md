@@ -21,4 +21,5 @@ optional arguments:
 Output of all tables (page list, information etc) in .csv files.
 
 © 2020 Dane Wullen
+
 NO WARRANTY, SOFWARE IS PROVIDED 'AS IS'
