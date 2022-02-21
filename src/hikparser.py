@@ -22,17 +22,17 @@ import hashlib
 
 class HikParser(Exception):
 
-    def to_byte(self, byte):
+    def to_bit(self, byte):
         return byte * 8
 
     def set_pos(self, pos):
-        self.data.pos = self.to_byte(pos)
+        self.data.pos = self.to_bit(pos)
 
     def get_pos(self):
-        return self.to_byte(self.data.pos)
+        return self.to_bit(self.data.pos)
 
     def skip_bytes(self, offset):
-        self.data.pos += self.to_byte(offset)
+        self.data.pos += self.to_bit(offset)
 
     def __init__(self, filename):
 
@@ -66,7 +66,7 @@ class HikParser(Exception):
         """
 
         self.set_pos(528)
-        self.master_sector.signatur = self.hex_to_ascii(self.data.read(self.to_byte(32)))
+        self.master_sector.signatur = self.hex_to_ascii(self.data.read(self.to_bit(32)))
         if not self.master_sector.check_signatur():
             raise Exception('SignatureException: Signature not equal to HIKVISION@HANGZHOU!')
 
@@ -100,7 +100,7 @@ class HikParser(Exception):
         self.set_pos(self.master_sector.hikbtree1_offset)
         # Skip 16 unused bytes
         self.skip_bytes(16)
-        self.hikbtree.signatur = self.hex_to_ascii(self.data.read(self.to_byte(8)))
+        self.hikbtree.signatur = self.hex_to_ascii(self.data.read(self.to_bit(8)))
         self.skip_bytes(36)
         self.hikbtree.created_time = datetime.datetime.fromtimestamp(self.data.read('uintle:32'))\
             .strftime('%d.%m.%Y %H:%M:%S'),
@@ -112,15 +112,26 @@ class HikParser(Exception):
     def read_page_list(self):
         """ Reads page list page for page and writes content into list."""
 
+        # The first page is not listed in the pagelist, we have to put it in manually
+
         self.set_pos(self.hikbtree.page_list_offset)
-        self.skip_bytes(96)
+        self.skip_bytes(24)
+        first_page_offset = self.data.read('uintle:64')
+        self.skip_bytes(64)
+        # self.skip_bytes(96)
         page_offset = self.data.read('uintle:64')
+
+        # Add first page to entries
+        page = HikPageEntry()
+        page.offset_to_page = first_page_offset
+        page.data_blocks = []
+        self.hikbtree.add_hikpage(page)
 
         while page_offset != 0:
             page = HikPageEntry()
             page.offset_to_page = page_offset
             self.skip_bytes(8)
-            page.channel = self.data.read(self.to_byte(2))
+            page.channel = self.data.read(self.to_bit(2))
             self.skip_bytes(6)
             page.start_time = self.data.read('uintle:32')
             page.end_time = self.data.read('uintle:32')
@@ -139,7 +150,7 @@ class HikParser(Exception):
             while unused_bytes == 18446744073709551615:
                 data_block = HikDataBlockEntry()
                 data_block.existence_of_file = self.data.read('uintle:64')
-                data_block.channel = self.data.read(self.to_byte(2))
+                data_block.channel = self.data.read(self.to_bit(2))
                 self.skip_bytes(6)
                 data_block.start_time = self.data.read('uintle:32')
                 data_block.end_time = self.data.read('uintle:32')
