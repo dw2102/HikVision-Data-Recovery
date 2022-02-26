@@ -1,15 +1,16 @@
 # HikVision Data Recovery
 
-Script to recover / get video files from NVR which uses the HikVision filesystem. 
+Script to recover / get video files from NVR hard drive which uses the HikVision filesystem. 
 
 Based on the paper from Jaehyeok Han, Doowon Jeong and Sangjin Lee (Korean University)
 
 https://www.researchgate.net/publication/285429692_Analysis_of_the_HIKVISION_DVR_file_system
 
+You'll need a .dd or .001 image of the hard drive of the NVR.
 
 # Usage:
 
-_main__.py [-h] -m MODE -i INPUT -d DIR
+__main__.py [-h] -m MODE -i INPUT -d DIR
 
 optional arguments:
   -h, --help            show this help message and exit
