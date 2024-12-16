@@ -6,9 +6,9 @@ Based on the paper from Jaehyeok Han, Doowon Jeong and Sangjin Lee (Korean Unive
 
 https://www.researchgate.net/publication/285429692_Analysis_of_the_HIKVISION_DVR_file_system
 
-You'll need a .dd or .001 image of the hard drive of the NVR.
+You'll need a encase or dd image or access to a raw disk.
 
-# Usage:
+Usage:
 
 __main__.py [-h] -m MODE -i INPUT -d DIR
 
@@ -21,6 +21,6 @@ optional arguments:
 
 Output of all tables (page list, information etc) in .csv files.
 
-© 2020 Dane Wullen
+© 2024 Dane Wullen
 
 NO WARRANTY, SOFWARE IS PROVIDED 'AS IS'
