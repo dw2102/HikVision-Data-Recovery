@@ -1,12 +1,12 @@
 """
 HIKVISION Video Data Recovery
 Author: Dane Wullen
-Date: 2020
-Version: 0.1
+Date: 2024
+Version: 0.2
 NO WARRANTY, SOFWARE IS PROVIDED 'AS IS'
 
 
-© 2020 Dane Wullen
+© 2024 Dane Wullen
 """
 
 import argparse
@@ -18,8 +18,8 @@ def main():
 
     print("########################################")
     print("HIKVISION Video Data Recovery")
-    print("Version 0.1")
-    print("© 2020 Dane Wullen")
+    print("Version 0.2")
+    print("© 2024 Dane Wullen")
     print("NO WARRANTY, SOFWARE IS PROVIDED 'AS IS'")
     print("########################################")
 
@@ -29,8 +29,6 @@ def main():
     ap.add_argument("-i", "--input", required=True, help="Inputfile (.dd or .001)")
     ap.add_argument("-d", "--dir", required=True, help="Output-Directory for logs and/or videos")
     args = vars(ap.parse_args())
-
-
 
     print("Read file: {}".format(args.get("input")))
 

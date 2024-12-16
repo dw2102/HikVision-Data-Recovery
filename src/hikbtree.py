@@ -1,12 +1,12 @@
 """
 HIKVISION Video Data Recovery
 Author: Dane Wullen
-Date: 2020
-Version: 0.1
+Date: 2024
+Version: 0.2
 NO WARRANTY, SOFWARE IS PROVIDED 'AS IS'
 
 
-© 2020 Dane Wullen
+© 2024 Dane Wullen
 """
 
 class HikBTree:
