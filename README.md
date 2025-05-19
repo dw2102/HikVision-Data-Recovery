@@ -16,7 +16,7 @@ optional arguments:
   -h, --help            show this help message and exit
   -m MODE, --mode MODE  Information (i) or extraction (e)
   -i INPUT, --input INPUT
-                        Inputfile (.dd or .001)
+                        Inputfile (.dd, .e01 or physical disk)
   -d DIR, --dir DIR     Output-Directory for logs and/or videos
 
 Output of all tables (page list, information etc) in .csv files.
